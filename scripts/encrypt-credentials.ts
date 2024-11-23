@@ -4,8 +4,6 @@ import fs from 'fs';
 
 dotenv.config({ path: '.env.local' });
 
-// Add debugging to check values
-console.log('PACKAGE_KEY:', process.env.PACKAGE_KEY);
 
 const credentials = {
     client: {
@@ -24,11 +22,9 @@ const credentials = {
     }
 };
 
-// Add debugging to check values
-//console.log('Credentials:', JSON.stringify(credentials, null, 2));
 
 const encryptedCredentials = encrypt(credentials, process.env.PACKAGE_KEY!);
 const output = `PACKAGE_CREDENTIALS="${encryptedCredentials}"\n`;
 // Append to .env.local
-fs.appendFileSync('.env.local', output);
+fs.appendFileSync('.env.production', output);
 console.log('Encrypted credentials have been added');
